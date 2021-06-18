@@ -13,35 +13,50 @@ class LetterPhone {
         // parse first digit, split into 3 letters, find all combinations for each letter, recursively
         // parameters: current list, more numbers to add, dictionary of digit to letters mappings
         // return value: whole list of strings based on digits
-        Hashtable<String, String> my_dict = new Hashtable<String, String>();
-        my_dict.put("2", "abc");
-        my_dict.put("3", "def");
-        my_dict.put("4", "ghi");
-        my_dict.put("5", "jkl");
-        my_dict.put("6", "mno");
-        my_dict.put("7", "pqrs");
-        my_dict.put("8", "tuv");
-        my_dict.put("9", "wxyz");
+        Hashtable<Character, String> my_dict = new Hashtable<Character, String>();
+        my_dict.put('2', "abc");
+        my_dict.put('3', "def");
+        my_dict.put('4', "ghi");
+        my_dict.put('5', "jkl");
+        my_dict.put('6', "mno");
+        my_dict.put('7', "pqrs");
+        my_dict.put('8', "tuv");
+        my_dict.put('9', "wxyz");
         
-        return find(my_dict, digits, new ArrayList<>());
+        return find(my_dict, digits, new ArrayList<String>());
         
         
     }
     
-    public ArrayList<String> find(Hashtable<String, String> dictionary, String digits, ArrayList<String> current) {
+    public ArrayList<String> find(Hashtable<Character, String> dictionary, String digits, ArrayList<String> current) {
+        // System.out.println(dictionary);
         if (digits.equals("")) {
+            System.out.println("okay");
             return new ArrayList<String>();
         }
         String elem = dictionary.get(digits.charAt(0));
+        // System.out.println(dictionary.get(digits.charAt(0)));
 
         for (int i = 0; i < elem.length(); i++) {
-            for (String j : find(dictionary, ))
+            System.out.println(elem.charAt(i));
+            if (find(dictionary, digits.substring(1), current).isEmpty()) {
+                current.add(String.valueOf(elem.charAt(i)));
+            } else {
+                for (String j : find(dictionary, digits.substring(1), current)) {
+                    // System.out.println(find(dictionary, digits.substring(1), current));
+                    current.add(String.valueOf(elem.charAt(i)) + j);
+                }
+
+            }
         }
-        
+
+        return current;
         
     }
 
     public static void main(String[] args) {
+        LetterPhone test = new LetterPhone();
+        System.out.println(test.letterCombinations("23"));
 
     }
 }
