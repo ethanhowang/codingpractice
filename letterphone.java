@@ -23,31 +23,33 @@ class LetterPhone {
         my_dict.put('8', "tuv");
         my_dict.put('9', "wxyz");
         
-        return find(my_dict, digits, new ArrayList<String>());
+        return find(my_dict, digits);
         
         
     }
     
-    public ArrayList<String> find(Hashtable<Character, String> dictionary, String digits, ArrayList<String> current) {
-        // System.out.println(dictionary);
+    public ArrayList<String> find(Hashtable<Character, String> dictionary, String digits) {
+        
         if (digits.equals("")) {
-            System.out.println("okay");
-            return new ArrayList<String>();
+            return new ArrayList<>();
         }
+
         String elem = dictionary.get(digits.charAt(0));
-        // System.out.println(dictionary.get(digits.charAt(0)));
 
-        for (int i = 0; i < elem.length(); i++) {
-            System.out.println(elem.charAt(i));
-            if (find(dictionary, digits.substring(1), current).isEmpty()) {
+        ArrayList<String> current = new ArrayList<String>(); 
+
+        if (digits.substring(1).equals("")) {
+            for (int i = 0; i < elem.length(); i++) {
                 current.add(String.valueOf(elem.charAt(i)));
-            } else {
-                for (String j : find(dictionary, digits.substring(1), current)) {
-                    // System.out.println(find(dictionary, digits.substring(1), current));
-                    current.add(String.valueOf(elem.charAt(i)) + j);
-                }
-
             }
+        } else {
+            ArrayList<String> build = find(dictionary, digits.substring(1));
+            for (int j = 0; j < elem.length(); j++) {
+                for (String k : build) { 
+                    current.add(String.valueOf(elem.charAt(j)) + k);
+                }
+            }
+
         }
 
         return current;
