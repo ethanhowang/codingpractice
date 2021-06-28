@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Shift",
+            "request": "launch",
+            "mainClass": "Shift",
+            "projectName": "codingpractice_d8e15b5d"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
