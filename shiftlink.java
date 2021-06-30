@@ -1,32 +1,11 @@
 import java.util.*;
 
-
 class Shift {
-  public LinkedList shiftLinkedList(LinkedList head, int k) {
-    // Write your code here.
-
-    //checking for base cases
+  public static LinkedList shiftLinkedList(LinkedList head, int k) {
     if (k == 0) {
         return head;
     }
-    /*iterating k times (when k is positive)
-     set last linkedlist's next parameter to head
-     set second to last next parameter to null
-     set last linkedlist as the head
-
-     you cannot determine the length of the linked list, unless you iterate through
-
-     positive case
- 
-     1) determine the length of the linkedlist
-     2) take length - k - 1 number of steps to find the linkedlist, and set its next to temp variable
-     3) set its next to null
-     4) go down temp list to check until null, set that next parameter equal to head
-     5) return temp
-     flaws: does not take into account negative; does not take into account k > length of entire linkedlist
-
-     */
-    else if (k > 0) {
+    else {
       // temp: for calculating total length and getting to the point to start changing pointers
       // temphead:  for iterating through and setting the last element's next parameter to head
       // newhead: keep track of the new head
@@ -39,7 +18,16 @@ class Shift {
       }
       // for loop for setting pointers
       temp = head;
-      for (int i = 0; i < size - (k + 1); i++) {
+			if (k % size == 0) {
+				return head;
+			}
+			int limit;
+			if (k > 0) {
+				limit = size - (k % size + 1);
+			} else {
+				limit = size - ((k % size) + size + 1);
+			}
+      for (int i = 0; i < limit; i++) {
         temp = temp.next;
       }
       LinkedList temphead = temp.next;
@@ -52,14 +40,10 @@ class Shift {
       }
       temphead.next = head;
       return newhead;
-
-
     }
-		
-    return null;
   }
-
-  static class LinkedList {
+	
+	static class LinkedList {
     public int value;
     public LinkedList next;
 
@@ -68,6 +52,9 @@ class Shift {
       next = null;
     }
   }
+  
+
+
 
   public static void main(String[] args) {
     Shift test = new Shift(); 
@@ -80,7 +67,7 @@ class Shift {
         param = param.next;
 
     }
-    LinkedList result = test.shiftLinkedList(headparam, 2);
+    LinkedList result = test.shiftLinkedList(headparam, -1);
     while (result != null) {
       System.out.println(result.value);
       result = result.next;
