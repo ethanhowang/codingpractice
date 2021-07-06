@@ -1,4 +1,5 @@
 import java.util.*;
+import java.lang.Math.*;
 
 class Shift {
   public static LinkedList shiftLinkedList(LinkedList head, int k) {
@@ -23,11 +24,11 @@ class Shift {
 			}
 			int limit;
 			if (k > 0) {
-				limit = size - (k % size + 1);
+				limit = size - (k % size);
 			} else {
-				limit = size - ((k % size) + size + 1);
+				limit = (Math.abs(k) % size);
 			}
-      for (int i = 0; i < limit; i++) {
+      for (int i = 1; i < limit; i++) {
         temp = temp.next;
       }
       LinkedList temphead = temp.next;
@@ -52,25 +53,5 @@ class Shift {
       next = null;
     }
   }
-  
-
-
-
-  public static void main(String[] args) {
-    Shift test = new Shift(); 
-    LinkedList param = new LinkedList(0);
-    LinkedList headparam = param;
-    int[] data = new int[]{1, 2, 3, 4, 5};
-    for (int i : data) {
-        LinkedList toadd = new LinkedList(i);
-        param.next = toadd;
-        param = param.next;
-
-    }
-    LinkedList result = test.shiftLinkedList(headparam, -1);
-    while (result != null) {
-      System.out.println(result.value);
-      result = result.next;
-    }
   }
-}
+
