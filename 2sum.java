@@ -6,20 +6,15 @@ class 2sum {
 		/* brute force: double for loop check every pair
 		*/
 		/* use the water tank method*/
-        /* This method takes in an integer array and an integer target. If there are a pair of integers
-        in the array that sum to the target integer, it will return the array of the two integers. Otherwise,
-        it would just return an empy array*/
 		
-		Hashtable<Integer, Integer> lookup = new Hashtable<Integer, Integer>();
-		
-		
-		for (int i : array) {
-			lookup.put(i, i);
-		}
+		HashSet<Integer> lookup = new HashSet<Integer>();
 		
 		for (int j = 0; j < array.length; j++) {
-			if (lookup.contains(targetSum - array[j]) && (targetSum - array[j] != array[j])) {
-				return new int[]{targetSum - array[j], array[j]};
+			int cand = targetSum - array[j];
+			if (lookup.contains(cand)) {
+				return new int[]{cand, array[j]};
+			} else {
+				lookup.add(array[j]);
 			}
 		}
 		
@@ -27,8 +22,6 @@ class 2sum {
   }
 
   public static void main(String[] args) {
-      System.out.println("True");
-      }
+	  System.out.println("This is a working solution");
+  }
 }
-
-    
