@@ -1,14 +1,26 @@
 def smallestDifference(arrayOne, arrayTwo):
     # Write your code here.
-	# brute force:
-	# double for loop:
-	# for each i in arrayone
-	# O(n^2) time, O(1) space
-	
-	best = [float('inf'), -float('inf')]
-	for i in arrayOne:
-		for j in arrayTwo:
-			if abs(i - j) < abs(best[0] - best[1]):
-				best = [i, j]
-    return best
+	arrayOne.sort()
+	arrayTwo.sort()
+	idxOne = 0
+	idxTwo = 0
+	smallest = float("inf")
+	current = float("inf")
+	bestCands = []
+	while idxOne < len(arrayOne) and idxTwo < len(arrayTwo):
+		firstNum = arrayOne[idxOne]
+		secondNum = arrayTwo[idxTwo]
+		current = abs(firstNum - secondNum)
+		if firstNum < secondNum:
+			idxOne += 1
+		elif secondNum < firstNum:
+			idxTwo += 1
+		else:
+			return [firstNum, secondNum]
+		
+		if smallest > current:
+			smallest = current
+			bestCands = [firstNum, secondNum]
+
+	return bestCands
 
